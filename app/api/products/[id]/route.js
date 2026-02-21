@@ -6,7 +6,8 @@ import { getAuthUser } from '@/lib/auth'
 export async function GET(request, { params }) {
   try {
     await connectDB()
-    const product = await Product.findById(params.id)
+    const { id } = await params
+    const product = await Product.findById(id)
     if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     return NextResponse.json(product)
   } catch (err) {
@@ -21,8 +22,9 @@ export async function PUT(request, { params }) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
     await connectDB()
+    const { id } = await params
     const data = await request.json()
-    const product = await Product.findByIdAndUpdate(params.id, data, { new: true, runValidators: true })
+    const product = await Product.findByIdAndUpdate(id, data, { new: true, runValidators: true })
     if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     return NextResponse.json(product)
   } catch (err) {
@@ -37,7 +39,8 @@ export async function DELETE(request, { params }) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
     }
     await connectDB()
-    const product = await Product.findByIdAndDelete(params.id)
+    const { id } = await params
+    const product = await Product.findByIdAndDelete(id)
     if (!product) return NextResponse.json({ error: 'Product not found' }, { status: 404 })
     return NextResponse.json({ message: 'Product deleted' })
   } catch (err) {

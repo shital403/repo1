@@ -6,7 +6,7 @@ A full-stack e-commerce platform for a clothing brand built with Next.js 14 (App
 
 ## Tech Stack
 
-- **Framework**: Next.js 14 (App Router)
+- **Framework**: Next.js 15 (App Router)
 - **Styling**: Tailwind CSS
 - **Database**: MongoDB with Mongoose
 - **Payments**: Stripe (test mode)
